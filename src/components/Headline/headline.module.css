@@ -1,0 +1,16 @@
+.headline {
+  font-size: 4.5rem;
+  background-image: var(--titleGradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  white-space: nowrap;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 65vh;
+}
