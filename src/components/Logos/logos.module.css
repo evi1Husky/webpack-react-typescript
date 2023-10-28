@@ -1,0 +1,13 @@
+.logo {
+  width: 90px;
+  margin: 2rem;
+}
+
+.typescriptLogo {
+  width: 85px;
+}
+
+.container {
+  display: flex;
+  margin-bottom: 1rem;
+}

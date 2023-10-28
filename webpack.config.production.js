@@ -1,7 +1,5 @@
 const path = require("path");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = (env, options) => {
   return {
@@ -12,10 +10,7 @@ module.exports = (env, options) => {
       filename: "js/[name].bundle.js",
       path: path.resolve(__dirname, "./dist"),
       publicPath: "",
-    },
-    experiments: {
-      asyncWebAssembly: true,
-      syncWebAssembly: true,
+      clean: true,
     },
     module: {
       rules: [
@@ -46,42 +41,16 @@ module.exports = (env, options) => {
           exclude: /\.module\.css$/,
         },
         {
-          test: /\.(?:ico|gif|png|jpg|jpeg|svg)$/i,
-          type: "javascript/auto",
-          loader: "file-loader",
-          options: {
-            publicPath: "../",
-            name: "[path][name].[ext]",
-            context: path.resolve(__dirname, "src/assets"),
-            emitFile: false,
-          },
-        },
-        {
-          test: /\.(woff(2)?|eot|ttf|otf|svg|)$/,
-          type: "javascript/auto",
-          exclude: /images/,
-          loader: "file-loader",
-          options: {
-            publicPath: "../",
-            context: path.resolve(__dirname, "src/assets"),
-            name: "[path][name].[ext]",
-            emitFile: false,
-          },
+          test: /\.svg/,
+          type: "asset/inline",
         },
       ],
     },
     plugins: [
-      new CleanWebpackPlugin(),
-      new CopyPlugin({
-        patterns: [
-          { from: "./src/assets/images", to: "images" },
-          { from: "./src/assets/fonts", to: "fonts" },
-        ],
-      }),
       new HtmlWebpackPlugin({
         template: "./src/index.html",
         inject: true,
-        minify: false,
+        minify: true,
       }),
     ],
   };
